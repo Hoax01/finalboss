@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<!--
+
+Hi nerd.
+
+I knew you'd inspect.
+
+If you're reading this...
+
+You make me ridiculously happy.
+
+Even if this website disappears someday...
+
+I hope you never doubt how much I love you.
+
+-Taha
+
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINAL BOSS: Areesha</title>
+<style>
+  /*
+  Still looking?
+  Fine. One more thing.
+  You're beautiful. Always.
+  Now go back.
+  */
+  :root{
+    --black:#0a0508;
+    --panel:#150a12;
+    --red:#e11d3c;
+    --red-dim:#7a1122;
+    --purple:#8b2fd9;
+    --purple-dim:#3d1466;
+    --lightred:#ff6b7a;
+    --white:#f5eef2;
+    --gray:#9c8a96;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Courier New', monospace;
+    overflow-x:hidden;
+    cursor:default;
+  }
+  h1,h2,.display{
+    font-family:'Impact','Arial Narrow',sans-serif;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  ::selection{ background:var(--red); color:var(--black); }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    pointer-events:none;
+    z-index:999;
+  }
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, transparent 1px, transparent 2px);
+    pointer-events:none;
+    z-index:998;
+  }
+
+  section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:60px 20px;
+    position:relative;
+    border-bottom:1px solid var(--red-dim);
+  }
+
+  #hero{
+    background:
+      radial-gradient(circle at 30% 20%, rgba(139,47,217,0.25), transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(225,29,60,0.25), transparent 50%),
+      var(--black);
+  }
+  .loading-text{
+    font-size:14px;
+    color:var(--gray);
+    letter-spacing:4px;
+    margin-bottom:20px;
+    opacity:0;
+    animation: fadeIn 0.5s forwards;
+    min-height:18px;
+    transition:opacity 0.3s;
+  }
+  .glitch-name{
+    font-size:clamp(40px, 10vw, 100px);
+    color:var(--white);
+    text-align:center;
+    line-height:0.95;
+    text-shadow:
+      0 0 20px var(--red),
+      0 0 40px var(--purple);
+    position:relative;
+    opacity:0;
+    animation: fadeIn 0.6s forwards 0.3s, flicker 4s infinite 2s;
+  }
+  .subtitle{
+    margin-top:18px;
+    font-size:clamp(13px, 2vw, 18px);
+    color:var(--lightred);
+    letter-spacing:2px;
+    text-align:center;
+    opacity:0;
+    animation: fadeIn 0.6s forwards 0.9s;
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:30px;
+    font-size:11px;
+    color:var(--gray);
+    letter-spacing:3px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes fadeIn{ to{opacity:1;} }
+  @keyframes flicker{
+    0%,19%,21%,23%,25%,54%,56%,100%{ opacity:1; }
+    20%,24%,55%{ opacity:0.7; }
+  }
+  @keyframes bounce{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(8px); }
+  }
+
+  .section-label{
+    font-size:12px;
+    color:var(--purple);
+    letter-spacing:4px;
+    margin-bottom:8px;
+  }
+  .section-title{
+    font-size:clamp(28px,5vw,44px);
+    margin-bottom:40px;
+    text-align:center;
+  }
+  .stat-card{
+    width:100%;
+    max-width:560px;
+    margin-bottom:22px;
+  }
+  .stat-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:6px;
+    color:var(--white);
+  }
+  .stat-bar-bg{
+    width:100%;
+    height:16px;
+    background:var(--panel);
+    border:1px solid var(--red-dim);
+    position:relative;
+    overflow:hidden;
+  }
+  .stat-bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--red), var(--purple));
+    width:0%;
+    transition:width 1.4s cubic-bezier(.2,.9,.3,1);
+  }
+  .stat-bar-fill.filled{ width:var(--w); }
+
+  .lookbook-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:16px;
+    max-width:800px;
+    width:100%;
+  }
+  .look-card{
+    background:var(--panel);
+    border:1px solid var(--purple-dim);
+    padding:26px 18px;
+    text-align:center;
+    transition:transform 0.25s, border-color 0.25s, box-shadow .25s;
+    cursor:default;
+  }
+  .look-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--red);
+    box-shadow:0 8px 24px rgba(225,29,60,0.25);
+  }
+  .look-card .emoji{ font-size:30px; margin-bottom:10px; display:block;}
+  .look-card h3{ font-size:15px; letter-spacing:1px; color:var(--lightred); margin-bottom:6px;}
+  .look-card p{ font-size:12px; color:var(--gray); line-height:1.5;}
+
+  .menu-card{
+    max-width:480px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--red-dim);
+    padding:34px;
+  }
+  .menu-card .header{
+    text-align:center;
+    border-bottom:1px dashed var(--red-dim);
+    padding-bottom:14px;
+    margin-bottom:18px;
+  }
+  .menu-item{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    padding:8px 0;
+    border-bottom:1px dotted rgba(255,255,255,0.08);
+  }
+  .menu-item span:last-child{ color:var(--gray); font-size:12px; }
+  .chef-note{
+    margin-top:18px;
+    font-size:12px;
+    color:var(--purple);
+    font-style:italic;
+    text-align:center;
+  }
+
+  /* ---------- COMPILER ---------- */
+  .compiler-card{
+    max-width:480px;
+    width:100%;
+    background:#050303;
+    border:1px solid var(--purple-dim);
+    padding:26px;
+    font-size:13px;
+    line-height:1.9;
+    color:#a8f5b0;
+    text-align:left;
+  }
+  .compiler-card .line{ opacity:0; animation:fadeIn 0.4s forwards; }
+  .compiler-bar-bg{ width:100%; height:10px; background:#111; margin:4px 0 10px; }
+  .compiler-bar-fill{ height:100%; background:#a8f5b0; width:0%; transition:width 1s ease; }
+
+  /* ---------- BATTLE ---------- */
+  #battle{ background:linear-gradient(180deg, var(--black), #1a0812); transition:background 0.6s; }
+  #battle.phase2{ background:linear-gradient(180deg, #1a0206, #2a0410); animation:shakeScreen 0.4s; }
+  @keyframes shakeScreen{
+    0%,100%{ transform:translateX(0); }
+    20%{ transform:translateX(-10px); }
+    40%{ transform:translateX(10px); }
+    60%{ transform:translateX(-6px); }
+    80%{ transform:translateX(6px); }
+  }
+  .phase2-flash{
+    position:fixed; inset:0;
+    background:var(--red);
+    opacity:0;
+    pointer-events:none;
+    z-index:1500;
+  }
+  .phase2-flash.active{ animation:flashRed 0.5s; }
+  @keyframes flashRed{
+    0%{ opacity:0.8; } 100%{ opacity:0; }
+  }
+  .jumpscare-overlay{
+    position:fixed; inset:0;
+    background:#000;
+    color:var(--white);
+    z-index:2200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-size:clamp(20px,5vw,36px);
+    letter-spacing:2px;
+    text-align:center;
+    font-family:'Courier New', monospace;
+  }
+  .jumpscare-overlay.show{ display:flex; }
+  .jumpscare-overlay.boom{
+    background:var(--red);
+    color:#fff;
+    font-family:'Impact','Arial Narrow',sans-serif;
+    font-size:clamp(40px,10vw,90px);
+    animation:shakeScreen 0.3s;
+  }
+  .battle-hp{
+    width:100%;
+    max-width:480px;
+    margin-bottom:14px;
+  }
+  .hp-label{ font-size:12px; letter-spacing:1px; display:flex; justify-content:space-between; margin-bottom:4px;}
+  .hp-bar-bg{ width:100%; height:14px; background:#1e0c14; border:1px solid var(--red-dim);}
+  .hp-bar-fill{ height:100%; background:linear-gradient(90deg,var(--lightred),var(--red)); width:100%; transition:width 0.5s ease;}
+  #enemy-hp-fill{ background:linear-gradient(90deg,var(--purple),#c04fff); }
+
+  .battle-log{
+    width:100%;
+    max-width:480px;
+    min-height:70px;
+    background:var(--panel);
+    border:1px solid var(--purple-dim);
+    padding:14px;
+    font-size:13px;
+    line-height:1.6;
+    margin:20px 0;
+    color:var(--lightred);
+  }
+  .battle-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:520px;
+  }
+  .btn{
+    background:transparent;
+    border:1px solid var(--red);
+    color:var(--white);
+    padding:12px 20px;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:background .2s, box-shadow .2s;
+  }
+  .btn:hover{ background:var(--red); box-shadow:0 0 20px rgba(225,29,60,0.5); }
+  .btn:disabled{ opacity:0.3; cursor:not-allowed; }
+  .btn.purple{ border-color:var(--purple); }
+  .btn.purple:hover{ background:var(--purple); box-shadow:0 0 20px rgba(139,47,217,0.5); }
+  .btn.danger{ border-color:#ff2244; }
+  .btn.danger:hover{ background:#ff2244; box-shadow:0 0 24px rgba(255,34,68,0.6); }
+
+  .call-card{
+    max-width:380px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--purple-dim);
+    border-radius:20px;
+    padding:36px 24px;
+    text-align:center;
+  }
+  .call-avatar{
+    width:70px; height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--red), var(--purple));
+    margin:0 auto 16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px;
+  }
+  .call-status{ font-size:12px; color:var(--gray); letter-spacing:2px; margin-bottom:6px;}
+  .call-timer{
+    font-size:28px;
+    color:var(--lightred);
+    letter-spacing:2px;
+    margin:14px 0;
+  }
+  .call-sub{ font-size:11px; color:var(--gray); }
+
+  .achievement{
+    max-width:420px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--red-dim);
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:14px;
+    filter:grayscale(0.8);
+    opacity:0.6;
+  }
+  .achievement.unlocked{
+    filter:none;
+    opacity:1;
+    border-color:var(--purple);
+  }
+  .ach-icon{ font-size:28px; }
+  .ach-text h4{ font-size:13px; color:var(--white); margin-bottom:3px; letter-spacing:.5px;}
+  .ach-text p{ font-size:11px; color:var(--gray); }
+
+  /* ---------- ACHIEVEMENT TOASTS ---------- */
+  #toast-container{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:1800;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-width:280px;
+  }
+  .toast{
+    background:var(--panel);
+    border:1px solid var(--purple);
+    padding:12px 16px;
+    font-size:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.5);
+    animation:toastIn 0.4s ease, toastOut 0.4s ease 3.6s forwards;
+  }
+  .toast.roast{ border-color:var(--red); }
+  .toast .t-title{ color:var(--lightred); font-weight:bold; letter-spacing:1px; margin-bottom:4px; font-size:11px;}
+  .toast .t-body{ color:var(--white); line-height:1.4; }
+  @keyframes toastIn{ from{ transform:translateX(120%); opacity:0; } to{ transform:translateX(0); opacity:1; } }
+  @keyframes toastOut{ to{ transform:translateX(120%); opacity:0; } }
+
+  /* ---------- BSOD ---------- */
+  #bsod{
+    position:fixed; inset:0;
+    background:#0033aa;
+    color:#fff;
+    font-family:'Courier New', monospace;
+    z-index:3000;
+    display:none;
+    padding:60px 8vw;
+    opacity:0;
+    transition:opacity 0.6s;
+  }
+  #bsod.show{ display:block; opacity:1; }
+  #bsod .sad{ font-size:60px; margin-bottom:20px; }
+  #bsod h2{ font-size:clamp(20px,4vw,32px); margin-bottom:20px; text-transform:none; font-family:inherit;}
+  #bsod p{ font-size:14px; margin-bottom:8px; line-height:1.6; }
+  #bsod .bsod-bar-bg{ width:100%; max-width:400px; height:14px; background:#001a55; margin:16px 0; }
+  #bsod .bsod-bar-fill{ height:100%; background:#fff; width:0%; transition:width 2s linear; }
+
+  .reason-box{
+    max-width:480px;
+    width:100%;
+    min-height:90px;
+    background:var(--panel);
+    border:1px solid var(--purple-dim);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+    font-size:15px;
+    margin-bottom:20px;
+    color:var(--white);
+  }
+  .reason-count{
+    font-size:11px; color:var(--gray); margin-bottom:20px; letter-spacing:1px;
+  }
+
+  .envelope{
+    width:220px; height:150px;
+    background:linear-gradient(135deg, var(--red-dim), var(--purple-dim));
+    border:1px solid var(--red);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    font-size:40px;
+    transition:transform .2s;
+  }
+  .envelope:hover{ transform:scale(1.05); }
+  .letter-content{
+    display:none;
+    max-width:560px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--red);
+    padding:36px;
+    font-size:15px;
+    line-height:1.9;
+    color:var(--white);
+    margin-top:20px;
+    white-space:pre-line;
+  }
+  .letter-content.show{ display:block; animation:fadeIn 0.6s; }
+
+  .quest-card{
+    max-width:480px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--purple);
+    padding:30px;
+    text-align:center;
+  }
+  .quest-card h3{ font-size:18px; margin-bottom:10px; }
+  .quest-card p{ font-size:13px; color:var(--gray); margin-bottom:20px; }
+
+  /* ---------- PATCH NOTES ---------- */
+  .patch-card{
+    max-width:520px;
+    width:100%;
+    background:var(--panel);
+    border:1px solid var(--purple-dim);
+    padding:30px;
+    font-size:13px;
+    line-height:1.9;
+  }
+  .patch-card h3{ font-size:16px; color:var(--lightred); margin-bottom:14px; font-family:inherit; letter-spacing:1px; }
+  .patch-add{ color:#8effa0; }
+  .patch-remove{ color:#ff8a8a; }
+  .patch-section-label{ color:var(--purple); margin-top:16px; margin-bottom:4px; display:block; letter-spacing:1px; font-size:11px; }
+
+  #finale{
+    background:radial-gradient(circle at 50% 30%, rgba(225,29,60,0.2), var(--black) 70%);
+  }
+  .finale-text{
+    max-width:600px;
+    text-align:center;
+    font-size:16px;
+    line-height:1.9;
+    color:var(--white);
+    white-space:pre-line;
+    display:none;
+  }
+  .finale-text.show{ display:block; animation:fadeIn 1s; }
+
+  /* ---------- SECRET ENDING ---------- */
+  #secret-btn-wrap{ margin-top:30px; text-align:center; display:none; }
+  #secret-btn-wrap.show{ display:block; animation:fadeIn 0.8s; }
+  #secret-overlay{
+    position:fixed; inset:0;
+    background:#000;
+    z-index:2500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:40px;
+    text-align:center;
+  }
+  #secret-overlay.show{ display:flex; }
+  #secret-overlay p{ font-size:14px; color:var(--gray); margin-bottom:10px; letter-spacing:1px; }
+  #secret-overlay .big{ font-size:clamp(22px,5vw,36px); color:var(--white); margin:16px 0; }
+  #secret-overlay .prob-bar-bg{ width:100%; max-width:400px; height:12px; background:#150a12; margin:16px 0; }
+  #secret-overlay .prob-bar-fill{ height:100%; background:linear-gradient(90deg,var(--red),var(--purple)); width:0%; transition:width 2.5s linear; }
+  .secret-final-text{
+    max-width:600px;
+    font-size:16px;
+    line-height:1.9;
+    color:var(--white);
+    white-space:pre-line;
+    display:none;
+    margin-top:20px;
+  }
+  .secret-final-text.show{ display:block; animation:fadeIn 1.2s; }
+  .confirm-card{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+  }
+  .confirm-card.show{ display:flex; }
+  .confirm-buttons{ display:flex; gap:16px; position:relative; height:60px; align-items:center; }
+  #confirm-no{ position:relative; transition:transform 0.15s ease; }
+
+  .heart{
+    position:fixed;
+    pointer-events:none;
+    font-size:20px;
+    z-index:1000;
+    animation:floatUp 1.4s ease-out forwards;
+  }
+  @keyframes floatUp{
+    to{ transform:translateY(-120px) scale(1.4); opacity:0; }
+  }
+
+  /* ---------- SAVE INDICATOR ---------- */
+  #save-indicator{
+    position:fixed;
+    top:16px;
+    left:16px;
+    font-size:11px;
+    color:var(--gray);
+    background:rgba(21,10,18,0.8);
+    padding:6px 12px;
+    border:1px solid var(--purple-dim);
+    z-index:1700;
+    opacity:0;
+    transition:opacity 0.4s;
+  }
+  #save-indicator.show{ opacity:1; }
+
+  /* ---------- HEARTBEAT ---------- */
+  #heartbeat{
+    position:fixed;
+    bottom:16px;
+    left:16px;
+    font-size:22px;
+    z-index:1700;
+    opacity:0;
+    transition:opacity 0.3s;
+  }
+  #heartbeat.show{ opacity:1; animation:thump 0.6s; }
+  @keyframes thump{
+    0%,100%{ transform:scale(1); }
+    30%{ transform:scale(1.4); }
+    60%{ transform:scale(0.95); }
+  }
+
+  footer{
+    text-align:center;
+    padding:30px;
+    font-size:11px;
+    color:var(--gray);
+    letter-spacing:2px;
+  }
+
+  @media (max-width:480px){
+    .stat-row{ font-size:11px; }
+    .battle-buttons{ flex-direction:column; width:100%; }
+    .btn{ width:100%; }
+  }
+
+  button:focus-visible, .envelope:focus-visible{
+    outline:2px solid var(--purple);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+<div id="save-indicator">💾 Saving Progress... ✔</div>
+<div id="heartbeat">❤️</div>
+<div class="phase2-flash" id="phase2-flash"></div>
+<div class="jumpscare-overlay" id="jumpscare-overlay">...</div>
+
+<div id="bsod">
+  <div class="sad">:(</div>
+  <h2>Your Girlfriend.exe has encountered an unexpected error.</h2>
+  <p><strong>Reason:</strong></p>
+  <p>Too cute to process.</p>
+  <p style="margin-top:20px;">Collecting information...</p>
+  <div class="bsod-bar-bg"><div class="bsod-bar-fill" id="bsod-bar"></div></div>
+  <p id="bsod-status">0% complete</p>
+</div>
+
+<div id="secret-overlay">
+  <div id="secret-stage-1">
+    <p>ACCESSING HIDDEN ENDING...</p>
+    <p id="secret-loading-dots">.</p>
+  </div>
+  <div id="secret-stage-2" style="display:none;">
+    <p>CONGRATULATIONS</p>
+    <div class="big">100% COMPLETION</div>
+    <p>🏆 Achievement Unlocked</p>
+    <div class="big" style="font-size:20px; color:var(--lightred);">Forever Route — Unlocked</div>
+    <button class="btn" style="margin-top:20px;" onclick="secretStage3()">CONTINUE</button>
+  </div>
+  <div id="secret-stage-3" style="display:none;">
+    <p>Calculating probability</p>
+    <p>of loving you forever...</p>
+    <div class="prob-bar-bg"><div class="prob-bar-fill" id="prob-bar"></div></div>
+    <p id="prob-result" style="visibility:hidden;">Result: 99.999999999999%</p>
+    <p id="prob-overflow" style="visibility:hidden; margin-top:14px; color:var(--lightred);">Overflow.<br>Infinity.<br>❤️</p>
+  </div>
+  <div id="secret-stage-4" style="display:none;">
+    <div class="confirm-card" id="confirm-card">
+      <p>Confirm Identity</p>
+      <div class="big" style="font-size:18px;">Are you really Areesha?</div>
+      <div class="confirm-buttons">
+        <button class="btn" id="confirm-yes" onclick="confirmYes()">Yes</button>
+        <button class="btn danger" id="confirm-no">No</button>
+      </div>
+    </div>
+  </div>
+  <div class="secret-final-text" id="secret-final-text">[This is the REAL final message — the one with zero jokes, zero gimmicks. Write exactly what you want her to read after she's unlocked everything. This is the payoff for the whole build.]</div>
+</div>
+
+<section id="hero">
+  <div class="loading-text" id="hero-loading">TAHA.EXE HAS ENTERED THE CHAT — LOADING PLAYER 2...</div>
+  <h1 class="glitch-name">Areesha</h1>
+  <div class="subtitle">THREAT LEVEL: CERTIFIED ZEHAR DISPENSER 🔪❤️</div>
+  <div class="scroll-hint">▼ SCROLL TO CONTINUE ▼</div>
+</section>
+
+<section id="stats">
+  <div class="section-label">CHARACTER SHEET</div>
+  <h2 class="section-title">Stat Block</h2>
+  <div class="stat-card">
+    <div class="stat-row"><span>Aggression</span><span>92%</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:92%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-row"><span>Love (don't tell her I know)</span><span>100%</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:100%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-row"><span>Volleyball Receive Technique</span><span>MAX</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:100%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-row"><span>Roast Damage</span><span>ONE-SHOT KO</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:98%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-row"><span>Dean's List Streak</span><span>🏆 x2</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:100%"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-row"><span>Haleem Cravings</span><span>∞</span></div>
+    <div class="stat-bar-bg"><div class="stat-bar-fill" style="--w:100%"></div></div>
+  </div>
+</section>
+
+<section id="lookbook">
+  <div class="section-label">DESIGNER'S CUT</div>
+  <h2 class="section-title">Her Versions</h2>
+  <div class="lookbook-grid">
+    <div class="look-card">
+      <span class="emoji">🖤</span>
+      <h3>Villain</h3>
+      <p>Black fit, red lip, zero patience for my nonsense. Terrifying. 10/10.</p>
+    </div>
+    <div class="look-card">
+      <span class="emoji">💃</span>
+      <h3>Dancer</h3>
+      <p>Room fills up the second she starts moving. Extroverted, loud, unbothered, dangerously good.</p>
+    </div>
+    <div class="look-card">
+      <span class="emoji">🏆</span>
+      <h3>Competitive</h3>
+      <p>Sports, academics, arguments, board games — doesn't matter what it is, she's playing to win. Always.</p>
+    </div>
+    <div class="look-card">
+      <span class="emoji">💜</span>
+      <h3>Soft Girl</h3>
+      <p>The rare footage where she just wants to be held, admits she misses me out loud, and goes quiet and sweet for a minute before the villain era reboots.</p>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-label">ORDER TICKET</div>
+  <h2 class="section-title">Her Menu</h2>
+  <div class="menu-card">
+    <div class="header">
+      <div style="font-size:12px; letter-spacing:2px; color:var(--gray);">TABLE FOR ONE (2, IF I'M LUCKY)</div>
+    </div>
+    <div class="menu-item"><span>Haleem</span><span>extra spice, obviously</span></div>
+    <div class="menu-item"><span>Dumplings</span><span>no substitutions</span></div>
+    <div class="menu-item"><span>Noodles</span><span>every single time</span></div>
+    <div class="menu-item"><span>Me</span><span>on the side, for roasting</span></div>
+    <div class="chef-note">chef's note: still not as spicy as her attitude</div>
+  </div>
+</section>
+
+<section id="compiler">
+  <div class="section-label">SYSTEM CHECK</div>
+  <h2 class="section-title">Compiling Relationship</h2>
+  <div class="compiler-card" id="compiler-card">
+    <div class="line" style="animation-delay:0.1s">$ compiling_relationship.exe</div>
+    <div class="line" style="animation-delay:0.6s">&gt; Checking Compatibility...</div>
+    <div class="compiler-bar-bg"><div class="compiler-bar-fill" style="width:100%; transition-delay:0.6s;"></div></div>
+    <div class="line" style="animation-delay:1.4s">&gt; Checking Communication...</div>
+    <div class="line" style="animation-delay:1.9s; color:#a8f5b0;">PASSED</div>
+    <div class="line" style="animation-delay:2.4s">&gt; Checking Cuteness...</div>
+    <div class="line" style="animation-delay:2.9s; color:var(--lightred);">ERROR: Integer Overflow</div>
+    <div class="line" style="animation-delay:3.4s">&gt; Compiling Future...</div>
+    <div class="line" style="animation-delay:4.2s; color:#a8f5b0; font-weight:bold;">BUILD SUCCESS.</div>
+  </div>
+</section>
+
+<section id="battle">
+  <div class="section-label">BOSS FIGHT</div>
+  <h2 class="section-title" id="battle-title">Taha vs. His Jaan</h2>
+
+  <div class="battle-hp">
+    <div class="hp-label"><span>TAHA</span><span id="you-hp-text">100/100</span></div>
+    <div class="hp-bar-bg"><div class="hp-bar-fill" id="you-hp-fill"></div></div>
+  </div>
+  <div class="battle-hp">
+    <div class="hp-label"><span id="enemy-name-label">Areesha</span><span id="enemy-hp-text">100/100</span></div>
+    <div class="hp-bar-bg"><div class="hp-bar-fill" id="enemy-hp-fill"></div></div>
+  </div>
+
+  <div class="battle-log" id="battle-log">A wild girlfriend appears. She looks unimpressed already.</div>
+
+  <div class="battle-buttons" id="battle-buttons">
+    <button class="btn" id="btn-hath" onclick="battleMove('hath')">HATH SE KHILA DEIN AAP</button>
+    <button class="btn" id="btn-love" onclick="battleMove('love')">SAY "I LOVE YOU"</button>
+    <button class="btn purple" id="btn-meme" onclick="battleMove('meme')">SEND A MEME</button>
+    <button class="btn" id="btn-compliment" onclick="battleMove('compliment')">COMPLIMENT HER FIT</button>
+    <button class="btn" id="btn-islamabad" onclick="battleMove('islamabad')">"AGAR MAI ISLAMABAD HOTA..."</button>
+    <button class="btn" id="btn-classes" onclick="battleMove('classes')">TALK DURING CLASSES</button>
+    <button class="btn purple" id="btn-round" onclick="battleMove('round')">FULL ROUND IN MY ARMS</button>
+    <button class="btn purple" id="btn-merijaan" onclick="battleMove('merijaan')">"MERI JAAN NAHI HAIN AAP?"</button>
+    <button class="btn purple" id="btn-friendship" onclick="battleMove('friendship')">BRAG ABOUT "OUR FRIENDSHIP"</button>
+    <button class="btn" id="btn-keepout" onclick="battleMove('keepout')">"ILL KEEP YOU OUT TILL 12"</button>
+    <button class="btn danger" id="btn-jealousy" onclick="battleMove('jealousy')">MISS HER HINT / SAY "NAH"</button>
+  </div>
+
+  <div id="victory-panel" style="display:none; text-align:center; margin-top:10px;">
+    <div style="font-size:clamp(28px,6vw,44px); font-family:'Impact','Arial Narrow',sans-serif; color:var(--lightred); letter-spacing:2px; margin-bottom:10px;">VICTORY</div>
+    <div style="font-size:14px; color:var(--gray); margin-bottom:4px;">Winner</div>
+    <div style="font-size:20px; color:var(--white); margin-bottom:16px;">Areesha ❤️</div>
+    <div style="font-size:12px; color:var(--gray); margin-bottom:4px;">Reason</div>
+    <div style="font-size:15px; color:var(--white); margin-bottom:22px;">Taha willingly surrendered.</div>
+    <div style="max-width:340px; margin:0 auto; font-size:12px; color:var(--gray); text-align:left; border-top:1px dashed var(--purple-dim); padding-top:14px;">
+      <div style="display:flex; justify-content:space-between;"><span>Damage dealt: Taha ➜ Areesha</span><span id="dmg-dealt">--</span></div>
+      <div style="display:flex; justify-content:space-between;"><span>Damage dealt: Areesha ➜ Taha</span><span>100</span></div>
+      <div style="display:flex; justify-content:space-between; color:var(--lightred);"><span>Love Damage</span><span>∞</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="call">
+  <div class="section-label">ONGOING</div>
+  <h2 class="section-title">Call Log</h2>
+  <div class="call-card">
+    <div class="call-avatar">📞</div>
+    <div class="call-status">CALLING...</div>
+    <div style="font-size:16px; letter-spacing:1px;">Areesha ❤️</div>
+    <div class="call-timer" id="call-timer">00:00:00</div>
+    <div class="call-sub">almost every single night since we started this — distance never stood a chance</div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-label">TROPHY ROOM</div>
+  <h2 class="section-title">Achievements</h2>
+  <div class="achievement unlocked">
+    <div class="ach-icon">🏆</div>
+    <div class="ach-text"><h4>Dean's List x2 (Both of You)</h4><p>Certified nerds, certified excellence.</p></div>
+  </div>
+  <div class="achievement unlocked">
+    <div class="ach-icon">📞</div>
+    <div class="ach-text"><h4>Long Distance Champion</h4><p>Almost every night. Distance never stood a chance.</p></div>
+  </div>
+  <div class="achievement">
+    <div class="ach-icon">🔒</div>
+    <div class="ach-text"><h4>Masters Degree Duo</h4><p>Locked — grinding toward this one together.</p></div>
+  </div>
+  <div class="achievement">
+    <div class="ach-icon">🔒</div>
+    <div class="ach-text"><h4>First Cosplay Together</h4><p>Locked — accept the side quest below to start.</p></div>
+  </div>
+</section>
+
+<section id="reasons">
+  <div class="section-label">TAP TO GENERATE</div>
+  <h2 class="section-title">Reasons I Like You</h2>
+  <div class="reason-box" id="reason-box">Click below for reason #1</div>
+  <div class="reason-count" id="reason-count">0 / 15 unlocked</div>
+  <button class="btn" onclick="nextReason()">GENERATE REASON →</button>
+</section>
+
+<section id="letter">
+  <div class="section-label">CLASSIFIED</div>
+  <h2 class="section-title">Decrypt Message</h2>
+  <div class="envelope" id="envelope" onclick="openLetter()" role="button" tabindex="0" aria-label="Open letter">💌</div>
+  <div class="letter-content" id="letter-content">Access Granted-- 
+    Babe I hope that you know that I love you, and I think about you every second of my life. You make my life complete and I couldn't be happier. I cannot see my life without you anymore. We will persist, through thick and think. Loveyou, my ragebaiter.
+  </div>
+</section>
+
+<section id="quest">
+  <div class="quest-card">
+    <div class="section-label">SIDE QUEST AVAILABLE</div>
+    <h3>Cosplay Hori/Miya Together?</h3>
+    <p>Rewards: matching photos, chaos, and bragging rights.</p>
+    <button class="btn purple" id="quest-accept-btn" onclick="acceptQuest()">ACCEPT QUEST</button>
+    <div id="quest-response" style="margin-top:14px; font-size:13px; color:var(--lightred); display:none;">Quest accepted.</div>
+  </div>
+</section>
+
+<section id="patchnotes">
+  <div class="section-label">CHANGELOG</div>
+  <h2 class="section-title">Relationship v2.4.7</h2>
+  <div class="patch-card">
+    <h3>What's New</h3>
+    <div class="patch-add">+ Added nightly calls</div>
+    <div class="patch-add">+ Increased trust</div>
+    <div class="patch-add">+ Improved communication</div>
+    <div class="patch-add">+ Added future planning</div>
+    <div class="patch-remove">- Removed awkwardness</div>
+    <span class="patch-section-label">KNOWN BUGS</span>
+    <div>• Still miss each other.</div>
+    <div>• Both overthink.</div>
+    <span class="patch-section-label">WON'T FIX</span>
+    <div>• Too obsessed with each other.</div>
+  </div>
+</section>
+
+<section id="finale">
+  <div class="section-label">RESULT</div>
+  <h2 class="section-title" id="finale-title">Loading result...</h2>
+  <button class="btn" id="finale-btn" onclick="showFinale()">CONTINUE</button>
+  <div class="finale-text" id="finale-text">I had a hundred ideas.
+
+I wanted to build something that felt like us.
+
+Something you'd smile at even months later.
+
+Something you'd come back to whenever you missed me.
+
+So I did.
+
+Happy Girlfriend Day. I love you.</div>
+
+  <div id="secret-btn-wrap">
+    <p style="font-size:12px; color:var(--gray); letter-spacing:1px; margin-bottom:10px;">??? SOMETHING ELSE UNLOCKED ???</p>
+    <button class="btn danger" onclick="openSecretEnding()">???</button>
+  </div>
+</section>
+
+<footer>MADE WITH ❤️ AND A LITTLE BIT OF FEAR — BY TAHA, aka aapki jaan</footer>
+
+<script>
+// heart / sparkle click trail
+document.addEventListener('click', function(e){
+  if (e.target.closest('button, .envelope')) return;
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  const icons = ['❤️','💜','🖤','✨'];
+  heart.textContent = icons[Math.floor(Math.random()*icons.length)];
+  heart.style.left = e.clientX + 'px';
+  heart.style.top = e.clientY + 'px';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(), 1400);
+});
+
+// stat bars animate in on scroll
+const bars = document.querySelectorAll('.stat-bar-fill');
+const barObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('filled'); }
+  });
+},{threshold:0.4});
+bars.forEach(b=>barObserver.observe(b));
+
+console.log("%cif you're reading this, I love you (and yes I know you check the console, MY nerdy wife)", 'color:#ff6b7a; font-size:16px; font-family:monospace;');
+console.log("%c...something feels hidden. developers usually hide secrets.", 'color:#9c8a96; font-size:11px; font-family:monospace;');
+setTimeout(()=>{
+  console.warn("Why are you still in the console? Go finish exploring the website first 😤");
+}, 5000);
+
+// ---- PROGRESS TRACKING FOR SECRET ENDING ----
+const progress = { reasons:false, letter:false, quest:false, battle:false };
+function checkSecretEnding(){
+  if(progress.reasons && progress.letter && progress.quest && progress.battle){
+    document.getElementById('secret-btn-wrap').classList.add('show');
+  }
+}
+
+// ---- LOADING QUOTES CYCLE (hero) ----
+const loadingQuotes = [
+  "TAHA.EXE HAS ENTERED THE CHAT — LOADING PLAYER 2...",
+  "Downloading forehead kisses...",
+  "Synchronizing sleep schedules...",
+  "Checking if she's mad... Result: Unknown.",
+  'Loading "hehe"s...',
+  "Finding next roast...",
+  "Rendering future together..."
+];
+let loadingIndex = 0;
+setInterval(()=>{
+  loadingIndex = (loadingIndex+1) % loadingQuotes.length;
+  const el = document.getElementById('hero-loading');
+  el.style.opacity = 0;
+  setTimeout(()=>{
+    el.textContent = loadingQuotes[loadingIndex];
+    el.style.opacity = 1;
+  }, 300);
+}, 3200);
+
+// ---- SAVE INDICATOR ----
+function pingSave(){
+  const el = document.getElementById('save-indicator');
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 1800);
+}
+setInterval(pingSave, 22000);
+
+// ---- HEARTBEAT ----
+function pingHeartbeat(){
+  const el = document.getElementById('heartbeat');
+  el.classList.remove('show'); void el.offsetWidth;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 700);
+}
+setInterval(pingHeartbeat, 90000);
+setTimeout(pingHeartbeat, 4000);
+
+// ---- ACHIEVEMENT TOASTS ----
+function showToast(title, body, isRoast){
+  const t = document.createElement('div');
+  t.className = 'toast' + (isRoast ? ' roast' : '');
+  t.innerHTML = '<div class="t-title">' + title + '</div><div class="t-body">' + body + '</div>';
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(()=>t.remove(), 4000);
+}
+const achievementQueue = [
+  ["🏆 Achievement Unlocked", "Survived Long Distance +500 XP"],
+  ["🏆 Achievement Unlocked", "Professional Ragebaiter"],
+  ["🏆 Achievement Unlocked", "Stayed Awake Till 6AM"],
+  ["🏆 Achievement Unlocked", "Read Every Reason ❤️"]
+];
+let achIndex = 0;
+function showNextAchievement(){
+  if(achIndex >= achievementQueue.length) return;
+  const [title, body] = achievementQueue[achIndex];
+  showToast(title, body, false);
+  achIndex++;
+  if(achIndex < achievementQueue.length){
+    setTimeout(showNextAchievement, 14000 + Math.random()*8000);
+  }
+}
+setTimeout(showNextAchievement, 10000);
+
+// ---- RANDOM ROASTS (every ~25s) ----
+const roasts = [
+  ["Areesha used: 🙄 Side Eye", "Critical Hit. Reminder: you still lost that one argument."],
+  ["SYSTEM", "She was right. Again. Like she always is."],
+  ["NOTICE", "Ragebait detected and affected. Taha has received +1 Emotional Damage."],
+  ["SYSTEM", "Haleem craving levels rising. No cure available."],
+  ["NOTICE", "She just said 'patani' about something she definitely remembers."]
+];
+function showRandomRoast(){
+  const r = roasts[Math.floor(Math.random()*roasts.length)];
+  showToast(r[0], r[1], true);
+  setTimeout(showRandomRoast, 25000 + Math.random()*6000);
+}
+setTimeout(showRandomRoast, 25000);
+
+// ---- BSOD (fake blue screen ~30s in) ----
+setTimeout(()=>{
+  const bsod = document.getElementById('bsod');
+  bsod.classList.add('show');
+  let pct = 0;
+  const bar = document.getElementById('bsod-bar');
+  const status = document.getElementById('bsod-status');
+  const iv = setInterval(()=>{
+    pct += 10;
+    bar.style.width = pct + '%';
+    status.textContent = pct + '% complete';
+    if(pct >= 100){
+      clearInterval(iv);
+      setTimeout(()=>{
+        status.textContent = 'Restarting...';
+        setTimeout(()=>{
+          bsod.innerHTML = '<div style="display:flex; align-items:center; justify-content:center; height:100%; flex-direction:column; text-align:center;"><p style="font-size:14px; margin-bottom:14px;">Just kidding.</p><h2 style="font-size:clamp(24px,5vw,40px);">Happy Girlfriend Day ❤️</h2></div>';
+          setTimeout(()=>{ bsod.classList.remove('show'); }, 2200);
+        }, 900);
+      }, 500);
+    }
+  }, 180);
+}, 32000);
+
+// ---- COMPATIBILITY: compiler bar fill trigger on scroll ----
+const compilerBar = document.querySelector('#compiler .compiler-bar-fill');
+const compilerObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.style.width = '100%'; }
+  });
+},{threshold:0.5});
+if(compilerBar) compilerObserver.observe(compilerBar);
+
+// ---- FAKE 8-BIT BOSS MUSIC (Web Audio, no external files) ----
+let audioCtx = null;
+let bossMusicNodes = [];
+let bossMusicPlaying = false;
+function ensureAudioCtx(){
+  if(!audioCtx){
+    try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ audioCtx = null; }
+  }
+  return audioCtx;
+}
+// unlock audio context on first user interaction (required by browsers)
+document.addEventListener('click', function unlock(){
+  ensureAudioCtx();
+  if(audioCtx && audioCtx.state === 'suspended'){ audioCtx.resume(); }
+  document.removeEventListener('click', unlock);
+});
+function startBossMusic(){
+  const ctx = ensureAudioCtx();
+  if(!ctx || bossMusicPlaying) return;
+  bossMusicPlaying = true;
+  const notes = [220, 220, 261.6, 220, 196, 220, 261.6, 293.7];
+  let step = 0;
+  const masterGain = ctx.createGain();
+  masterGain.gain.value = 0.05;
+  masterGain.connect(ctx.destination);
+  bossMusicNodes.push(masterGain);
+  const interval = setInterval(()=>{
+    if(!bossMusicPlaying){ clearInterval(interval); return; }
+    const osc = ctx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.value = notes[step % notes.length];
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.08, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+    osc.connect(g);
+    g.connect(masterGain);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
+    step++;
+  }, 200);
+  bossMusicNodes.push(interval);
+}
+function stopBossMusic(){
+  bossMusicPlaying = false;
+  bossMusicNodes.forEach(n=>{
+    if(typeof n === 'number') clearInterval(n);
+  });
+  bossMusicNodes = [];
+}
+
+// ---- BATTLE GAME ----
+let youHP = 100, enemyHP = 100, battleOver = false, phase2 = false, dmgDealtToEnemy = 0;
+const log = document.getElementById('battle-log');
+const moves = {
+  hath: { you:"I use HATH SE KHILA DEIN AAP!", enemy:"She uses HATH SE ZEHAR NA KHILA DUN?! It's super effective!" },
+  love: { you:'I say "I love you"!', enemy:'She uses "ILL KILL YOU"! Critical hit!' },
+  meme: { you:"I send a meme!", enemy:"She sends back a better one instantly. Devastating." },
+  compliment: { you:"I compliment her fit!", enemy:"She says 'I know' and attacks anyway." },
+  islamabad: { you:"I say \"mai hota Islamabad to ye aapke sath kar deta\"!", enemy:"She uses \"SKILL ISSUE that u aren't here then\"! It hurt more than expected." },
+  classes: { you:"I say \"classes mai bhi ill talk with you\"!", enemy:'She uses "ILL SLAP YOU"! Direct hit.' },
+  round: { you:"I say \"ill do a full round with you in my arms\"!", enemy:"She uses \"ok nahi hua to I won't talk to you for a week\"! Threat damage." },
+  merijaan: { you:'I ask "meri jaan nahi hain aap?"!', enemy:'She says "nope (hehehe)"! Emotional damage!' },
+  friendship: { you:"I say \"so I was telling person xyz about our friendship\"!", enemy:"She uses \"acha? ok we are friends, no from today we are friends... you said so yourself\"! Brutal." },
+  keepout: { you:'I say "ill keep you out for later, say 12 even"!', enemy:'She uses "puri raat raho gay to manu gi"! Negotiation successful, still took damage.' },
+  jealousy: { you:"I completely miss the hint and just say \"nah I don't think I can\"...", enemy:"She uses \"ok. will do this with some other guy then\" — JEALOUSY DAMAGE! It's super effective!" }
+};
+function triggerPhase2(){
+  // Jumpscare comedy beat first
+  const js = document.getElementById('jumpscare-overlay');
+  js.classList.remove('boom');
+  js.textContent = '...';
+  js.classList.add('show');
+  setTimeout(()=>{
+    js.textContent = 'Wait.';
+  }, 600);
+  setTimeout(()=>{
+    js.textContent = 'She seems different...';
+  }, 1300);
+  setTimeout(()=>{
+    js.classList.add('boom');
+    js.innerHTML = 'TRUE FORM<br><span style="font-size:0.5em;">Expressive Areesha</span>';
+  }, 2200);
+  setTimeout(()=>{
+    js.classList.remove('show');
+    js.classList.remove('boom');
+    actuallyStartPhase2();
+  }, 2900);
+}
+function actuallyStartPhase2(){
+  phase2 = true;
+  dmgDealtToEnemy = Math.round(100 - Math.max(0, enemyHP));
+  document.getElementById('battle').classList.add('phase2');
+  document.getElementById('enemy-name-label').textContent = 'Expressive Areesha';
+  document.getElementById('enemy-hp-text').textContent = '∞ / ∞';
+  document.getElementById('enemy-hp-fill').style.width = '100%';
+  document.getElementById('battle-title').textContent = 'uh oh';
+  // no red flash here — this phase is soft, not angry
+  document.getElementById('battle-buttons').style.display = 'none';
+  // reset Taha's HP for this phase, he was never really losing before
+  youHP = 58;
+  document.getElementById('you-hp-fill').style.width = youHP+'%';
+  document.getElementById('you-hp-text').textContent = youHP+'/100';
+  log.textContent = "Everything goes quiet. She's never like this. Something's about to happen.";
+  showToast("💜 RARE EVENT", "Areesha is being expressive. Brace yourself.", false);
+  setTimeout(runExpressiveSequence, 2000);
+}
+const expressiveLines = [
+  { line:"I miss you.", target:42 },
+  { line:"I wish you were here.", target:24 },
+  { line:"I'm proud of you.", target:10 },
+  { line:"I love you.", target:0 }
+];
+function animateHpTo(target){
+  return new Promise(resolve=>{
+    const iv = setInterval(()=>{
+      if(youHP <= target){
+        clearInterval(iv);
+        resolve();
+        return;
+      }
+      youHP = Math.max(target, youHP - 1);
+      document.getElementById('you-hp-fill').style.width = youHP+'%';
+      document.getElementById('you-hp-text').textContent = youHP+'/100';
+      if(Math.random() < 0.5) spawnHpHeart();
+    }, 25);
+  });
+}
+function spawnHpHeart(){
+  const bar = document.getElementById('you-hp-fill');
+  const rect = bar.getBoundingClientRect();
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.textContent = '❤️';
+  heart.style.left = (rect.left + Math.random()*rect.width) + 'px';
+  heart.style.top = rect.top + 'px';
+  heart.style.fontSize = '14px';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(), 1400);
+}
+async function runExpressiveSequence(){
+  for(const step of expressiveLines){
+    log.innerHTML = 'Areesha: "' + step.line + '"';
+    await new Promise(r=>setTimeout(r, 900));
+    log.innerHTML = 'Areesha: "' + step.line + '"<br>❤️ CRITICAL HIT ❤️<br>Its super effective.';
+    await animateHpTo(step.target);
+    await new Promise(r=>setTimeout(r, 700));
+  }
+  endBattleVictory();
+}
+function endBattleVictory(){
+  battleOver = true;
+  log.innerHTML = "I cannot defeat her. She has already won my heart.";
+  document.getElementById('victory-panel').style.display = 'block';
+  document.getElementById('dmg-dealt').textContent = dmgDealtToEnemy;
+  progress.battle = true;
+  checkSecretEnding();
+}
+function battleMove(type){
+  if(battleOver || phase2) return;
+  const m = moves[type];
+
+  if(type === 'jealousy'){
+    youHP = Math.max(0, youHP - 60);
+    enemyHP = Math.max(0, enemyHP - (Math.random()*4+2));
+  } else {
+    youHP = Math.max(0, youHP - (Math.random()*15+10));
+    enemyHP = Math.max(0, enemyHP - (Math.random()*8+4));
+  }
+
+  document.getElementById('you-hp-fill').style.width = youHP+'%';
+  document.getElementById('enemy-hp-fill').style.width = enemyHP+'%';
+  document.getElementById('you-hp-text').textContent = Math.round(youHP)+'/100';
+  document.getElementById('enemy-hp-text').textContent = Math.round(enemyHP)+'/100';
+  log.textContent = m.you + ' ' + m.enemy;
+
+  if(enemyHP <= 50){
+    setTimeout(triggerPhase2, 500);
+    return;
+  }
+}
+
+// ---- CALL TIMER ----
+const startDate = new Date("2026-05-30T00:00:00");
+function updateTimer(){
+  const now = new Date();
+  let diff = Math.floor((now - startDate)/1000);
+  const days = Math.floor(diff / 86400);
+  diff -= days*86400;
+  const hrs = Math.floor(diff/3600).toString().padStart(2,'0');
+  const mins = Math.floor((diff%3600)/60).toString().padStart(2,'0');
+  const secs = Math.floor(diff%60).toString().padStart(2,'0');
+  document.getElementById('call-timer').textContent = days + 'd ' + hrs + ':' + mins + ':' + secs;
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// ---- REASONS GENERATOR ----
+const reasons = [
+  "You ragebait me and yet it is somehow still the sweetest thing I hear all day",
+  "I have never won an argument once, and that is just how I like it",
+  "Amidst all the ragebaits you are expressive once in a blue moon too, that feeling is enough to keep me going the whole week",
+  "You explain to me your day with such enthusiasm, so that when you feel like I am not listening you get naraz, which tells me how deeply you take our convos",
+  "Even when you say no pics, at times you do send pictures in dm...making them sacred, and giving me a glimpse of your beauty",
+  "Long distance yet you never once made it feel 'distant'",
+  "You're already planning masters with me like there's no other option.",
+  "I yap a lot about my life and you always let me, even when you feel like I am not giving you an equal opportunity",
+  "You are as competitive as me if not more, gives me even more motivation to keep going and study harder",
+  "You plan our future and 'how you will decorate each room' like it is decided. It is, everything is indeed decided meri jaan",
+  "Your freakiness meter is close to mine, heck you even make me your personal wattpad storyteller",
+  "You didn't let me pay for everything when we were just friends, tells me you are a different kind of woman, my kind of woman",
+  "Your laugh after you know you have successfully ragebaited me",
+  "Your 'patani' 'bhool gayi' 'kya baat ho rahi thi?' softlaunching previous day things you wanted to talk more about",
+  "You roast me instantly but you're the first one checking if I'm okay."
+];
+let reasonIndex = 0;
+function nextReason(){
+  if(reasonIndex >= reasons.length){
+    document.getElementById('reason-box').textContent = "That's all 15. You already know the rest.";
+    progress.reasons = true;
+    checkSecretEnding();
+    return;
+  }
+  document.getElementById('reason-box').textContent = reasons[reasonIndex];
+  reasonIndex++;
+  document.getElementById('reason-count').textContent = reasonIndex + ' / 15 unlocked';
+  if(reasonIndex === reasons.length){
+    progress.reasons = true;
+    checkSecretEnding();
+  }
+}
+
+// ---- LETTER ----
+function openLetter(){
+  document.getElementById('letter-content').classList.add('show');
+  document.getElementById('envelope').style.display = 'none';
+  progress.letter = true;
+  checkSecretEnding();
+}
+document.getElementById('envelope').addEventListener('keydown', function(e){
+  if(e.key === 'Enter' || e.key === ' '){ openLetter(); }
+});
+
+// ---- QUEST ----
+function acceptQuest(){
+  document.getElementById('quest-response').style.display = 'block';
+  progress.quest = true;
+  checkSecretEnding();
+}
+
+// ---- FINALE ----
+function showFinale(){
+  document.getElementById('finale-title').textContent = 'YOU WIN';
+  document.getElementById('finale-text').classList.add('show');
+  document.getElementById('finale-btn').style.display = 'none';
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = ['❤️','💜','🖤','✨'][Math.floor(Math.random()*4)];
+      heart.style.left = Math.random()*window.innerWidth + 'px';
+      heart.style.top = window.innerHeight - 50 + 'px';
+      heart.style.fontSize = (16+Math.random()*16)+'px';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(), 1400);
+    }, i*30);
+  }
+}
+document.getElementById('finale-title').textContent = 'One more thing...';
+
+// ---- SECRET ENDING FLOW ----
+function openSecretEnding(){
+  const overlay = document.getElementById('secret-overlay');
+  overlay.classList.add('show');
+  document.getElementById('secret-stage-1').style.display = 'block';
+  document.getElementById('secret-stage-2').style.display = 'none';
+  document.getElementById('secret-stage-3').style.display = 'none';
+  document.getElementById('secret-stage-4').style.display = 'none';
+  document.getElementById('confirm-card').classList.remove('show');
+  document.getElementById('secret-final-text').classList.remove('show');
+  document.getElementById('prob-result').style.visibility = 'hidden';
+  document.getElementById('prob-overflow').style.visibility = 'hidden';
+  document.getElementById('prob-bar').style.width = '0%';
+
+  let dots = 1;
+  const dotsEl = document.getElementById('secret-loading-dots');
+  const dotIv = setInterval(()=>{
+    dots = (dots % 3) + 1;
+    dotsEl.textContent = '.'.repeat(dots);
+  }, 400);
+
+  setTimeout(()=>{
+    clearInterval(dotIv);
+    document.getElementById('secret-stage-1').style.display = 'none';
+    document.getElementById('secret-stage-2').style.display = 'block';
+  }, 2200);
+}
+function secretStage3(){
+  document.getElementById('secret-stage-2').style.display = 'none';
+  document.getElementById('secret-stage-3').style.display = 'block';
+  const bar = document.getElementById('prob-bar');
+  setTimeout(()=>{ bar.style.width = '100%'; }, 100);
+  setTimeout(()=>{
+    document.getElementById('prob-result').style.visibility = 'visible';
+    setTimeout(()=>{
+      document.getElementById('prob-overflow').style.visibility = 'visible';
+      setTimeout(()=>{
+        secretStage4();
+      }, 2200);
+    }, 1400);
+  }, 2700);
+}
+function secretStage4(){
+  document.getElementById('secret-stage-3').style.display = 'none';
+  document.getElementById('secret-stage-4').style.display = 'block';
+  document.getElementById('confirm-card').classList.add('show');
+}
+function confirmYes(){
+  document.getElementById('secret-stage-4').style.display = 'none';
+  // 3 second silence before the real message
+  const wrap = document.getElementById('secret-overlay');
+  const pause = document.createElement('p');
+  pause.textContent = '...';
+  pause.style.fontSize = '20px';
+  pause.id = 'silence-dots';
+  wrap.insertBefore(pause, document.getElementById('secret-final-text'));
+  setTimeout(()=>{
+    pause.remove();
+    document.getElementById('secret-final-text').classList.add('show');
+  }, 3000);
+}
+// move the "No" button away from the cursor
+(function(){
+  const noBtn = document.getElementById('confirm-no');
+  if(!noBtn) return;
+  noBtn.addEventListener('mouseenter', function(){
+    const x = (Math.random()*160 - 80);
+    const y = (Math.random()*40 - 20);
+    noBtn.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  });
+  noBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    const x = (Math.random()*160 - 80);
+    const y = (Math.random()*40 - 20);
+    noBtn.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  });
+})();
+
+// ---- KONAMI CODE ----
+const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiPos = 0;
+document.addEventListener('keydown', function(e){
+  const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+  if(key === konami[konamiPos]){
+    konamiPos++;
+    if(konamiPos === konami.length){
+      konamiPos = 0;
+      showToast("👨‍💻 Developer Cheats Enabled", "Infinite Love: Enabled");
+    }
+  } else {
+    konamiPos = (key === konami[0]) ? 1 : 0;
+  }
+});
+
+// ---- ESC KEY EASTER EGG ----
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    showToast("SYSTEM", "There is no escaping me. 😂");
+  }
+});
+
+// ---- ALT+F4 EASTER EGG ----
+window.addEventListener('keydown', function(e){
+  if(e.altKey && e.key === 'F4'){
+    e.preventDefault();
+    alert("Relationship.exe\n\nClosing is disabled.\n\nReason: Mutual dependency detected.");
+  }
+});
+
+// ---- SECRET WORD EASTER EGG ----
+// Type "haleem" anywhere on the page for a surprise
+let typedBuffer = '';
+document.addEventListener('keydown', function(e){
+  if(e.key.length === 1){
+    typedBuffer += e.key.toLowerCase();
+    typedBuffer = typedBuffer.slice(-10);
+    if(typedBuffer.includes('haleem')){
+      typedBuffer = '';
+      triggerHaleemEasterEgg();
+    }
+  }
+});
+function triggerHaleemEasterEgg(){
+  const msg = document.createElement('div');
+  msg.textContent = "🍲 SYSTEM ALERT: Haleem cravings detected. Taha has been notified. Extra spice incoming.";
+  msg.style.position = 'fixed';
+  msg.style.top = '20px';
+  msg.style.left = '50%';
+  msg.style.transform = 'translateX(-50%)';
+  msg.style.background = '#150a12';
+  msg.style.border = '1px solid #e11d3c';
+  msg.style.color = '#f5eef2';
+  msg.style.padding = '14px 24px';
+  msg.style.fontSize = '13px';
+  msg.style.fontFamily = "'Courier New', monospace";
+  msg.style.zIndex = '2000';
+  msg.style.maxWidth = '90vw';
+  msg.style.textAlign = 'center';
+  document.body.appendChild(msg);
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '🍲';
+      heart.style.left = Math.random()*window.innerWidth + 'px';
+      heart.style.top = window.innerHeight - 50 + 'px';
+      heart.style.fontSize = '22px';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(), 1400);
+    }, i*40);
+  }
+  setTimeout(()=>msg.remove(), 3500);
+}
+</script>
+
+</body>
+</html>

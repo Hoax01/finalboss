@@ -441,6 +441,60 @@ I hope you never doubt how much I love you.
     margin-bottom:20px;
     color:var(--white);
   }
+  .reason-grid{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:14px;
+  max-width:820px;
+  width:100%;
+  margin-bottom:16px;
+}
+.reason-card{
+  perspective:800px;
+  aspect-ratio:1/1.1;
+  cursor:pointer;
+}
+.reason-card-inner{
+  position:relative;
+  width:100%; height:100%;
+  transition:transform 0.6s cubic-bezier(.2,.9,.3,1);
+  transform-style:preserve-3d;
+}
+.reason-card.flipped .reason-card-inner{ transform:rotateY(180deg); }
+.reason-face{
+  position:absolute; inset:0;
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:10px;
+  border:1px solid var(--purple-dim);
+  background:var(--panel);
+}
+.reason-front{
+  font-size:22px;
+  color:var(--purple);
+  flex-direction:column;
+  gap:4px;
+}
+.reason-front .num{ font-size:11px; color:var(--gray); letter-spacing:1px; }
+.reason-back{
+  transform:rotateY(180deg);
+  font-size:11px;
+  line-height:1.5;
+  color:var(--white);
+  border-color:var(--red);
+  background:linear-gradient(160deg, var(--panel), var(--red-dim) 180%);
+}
+.reason-card:hover .reason-face{ border-color:var(--red); }
+@media (max-width:700px){
+  .reason-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:420px){
+  .reason-grid{ grid-template-columns:repeat(3, 1fr); gap:8px; }
+  .reason-back{ font-size:9.5px; }
+}
   .reason-count{
     font-size:11px; color:var(--gray); margin-bottom:20px; letter-spacing:1px;
   }
@@ -838,11 +892,10 @@ I hope you never doubt how much I love you.
 </section>
 
 <section id="reasons">
-  <div class="section-label">TAP TO GENERATE</div>
+  <div class="section-label">TAP TO REVEAL</div>
   <h2 class="section-title">Reasons I Like You</h2>
-  <div class="reason-box" id="reason-box">Click below for reason #1</div>
+  <div class="reason-grid" id="reason-grid"></div>
   <div class="reason-count" id="reason-count">0 / 15 unlocked</div>
-  <button class="btn" onclick="nextReason()">GENERATE REASON →</button>
 </section>
 
 <section id="letter">
@@ -1253,6 +1306,7 @@ setInterval(updateTimer, 1000);
 updateTimer();
 
 // ---- REASONS GENERATOR ----
+// ---- REASONS GRID ----
 const reasons = [
   "You ragebait me and yet it is somehow still the sweetest thing I hear all day",
   "I have never won an argument once, and that is just how I like it",
@@ -1270,22 +1324,35 @@ const reasons = [
   "Your 'patani' 'bhool gayi' 'kya baat ho rahi thi?' softlaunching previous day things you wanted to talk more about",
   "You roast me instantly but you're the first one checking if I'm okay."
 ];
-let reasonIndex = 0;
-function nextReason(){
-  if(reasonIndex >= reasons.length){
-    document.getElementById('reason-box').textContent = "That's all 15. You already know the rest.";
-    progress.reasons = true;
-    checkSecretEnding();
-    return;
-  }
-  document.getElementById('reason-box').textContent = reasons[reasonIndex];
-  reasonIndex++;
-  document.getElementById('reason-count').textContent = reasonIndex + ' / 15 unlocked';
-  if(reasonIndex === reasons.length){
+let flippedCount = 0;
+function buildReasonGrid(){
+  const grid = document.getElementById('reason-grid');
+  reasons.forEach((text, i)=>{
+    const card = document.createElement('div');
+    card.className = 'reason-card';
+    card.innerHTML = `
+      <div class="reason-card-inner">
+        <div class="reason-face reason-front">
+          <span>❤️</span>
+          <span class="num">#${i+1}</span>
+        </div>
+        <div class="reason-face reason-back">${text}</div>
+      </div>`;
+    card.addEventListener('click', ()=>flipReason(card));
+    grid.appendChild(card);
+  });
+}
+function flipReason(card){
+  if(card.classList.contains('flipped')) return;
+  card.classList.add('flipped');
+  flippedCount++;
+  document.getElementById('reason-count').textContent = flippedCount + ' / 15 unlocked';
+  if(flippedCount === reasons.length){
     progress.reasons = true;
     checkSecretEnding();
   }
 }
+buildReasonGrid();
 
 // ---- LETTER ----
 function openLetter(){
